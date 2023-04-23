@@ -49,6 +49,13 @@ const App = () => {
     }
   }
 
+  const handleLogout = (event) => {
+    event.preventDefault()
+    window.localStorage.clear()
+
+    setUser(null)
+  }
+
   const loginForm = () => (
     <form onSubmit={handleLogin}>
       <div>
@@ -73,14 +80,33 @@ const App = () => {
     </form>
   )
 
+  // TODO:
+
+  /*
+    retrieve blog posts by user
+    username: root2
+    password: test
+  */
+
+
+
   return (
     <div>
       <h2>blogs</h2>
       <Notification message={errorMessage} />
-      {loginForm()}
-      {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
-      )}
+      {!user && loginForm()}
+      {user && <div>
+        <p>
+          {user.name} logged in
+          <button onClick={handleLogout}>logout</button>
+        </p>
+
+          {blogs.map(blog =>
+            <Blog key={blog.id} blog={blog} />
+          )}
+        </div>
+
+      }
     </div>
   )
 }
