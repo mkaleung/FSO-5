@@ -3,6 +3,8 @@ import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
 import Notification from './components/Notification'
+import BlogForm from './components/BlogForm'
+import Togglable from './components/Toggleable'
 
   /*
     username: root2
@@ -133,39 +135,19 @@ const App = () => {
           {user.name} logged in
           <button onClick={handleLogout}>logout</button>
         </p>
-        <div>
-          <form onSubmit={handleBlogPost}>
-            <div>
-              title:
-              <input
-                type="text"
-                value={title}
-                name="Title"
-                onChange={({ target }) => setTitle(target.value)} 
-              />
-              
-            </div>
-            <div>
-              author:
-              <input
-                type="text"
-                value={author}
-                name="Author"
-                onChange={({ target }) => setAuthor(target.value)} 
-              />
-            </div>
-            <div>
-              url:
-              <input
-                type="url"
-                value={url}
-                name="Url"
-                onChange={({ target }) => setUrl(target.value)} 
-              />
-            </div>
-            <button>create</button>
-          </form>
-        </div>
+
+        <Togglable buttonLabel='new note'>
+          <BlogForm 
+              handleBlogPost = {handleBlogPost}
+              title = {title}
+              author = {author}
+              url = {url}
+              setTitle = {setTitle}
+              setAuthor = {setAuthor}
+              setUrl = {setUrl}
+          />
+        </Togglable>
+
           {blogs.map(blog =>
             <Blog key={blog.id} blog={blog} />
           )}
