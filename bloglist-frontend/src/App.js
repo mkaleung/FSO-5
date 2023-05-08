@@ -12,14 +12,11 @@ import Togglable from './components/Toggleable'
   */
 
 const App = () => {
-  const [blogs, setBlogs] = useState([])
   const [errorMessage, setErrorMessage] = useState(null)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
+  const [blogs, setBlogs] = useState([])
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -90,22 +87,11 @@ const App = () => {
     </form>
   )
 
-  const handleBlogPost = (event) => {
-    event.preventDefault()
-
-    const blogObject = {
-      title: title,
-      author: author,
-      url: url
-    }
-
+  const addBlog = (blogObject) => {
     blogService
     .create(blogObject)
     .then(returnedBlog => {
       setBlogs(blogs.concat(returnedBlog))
-      setTitle('')
-      setAuthor('')
-      setUrl('')
       setErrorMessage(
         `Blog Post '${blogObject.title}' was added successfully`
       )
@@ -120,11 +106,10 @@ const App = () => {
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
-  })
+   })
   }
 
-
-
+  
   return (
     <div>
       <h2>blogs</h2>
@@ -137,15 +122,7 @@ const App = () => {
         </p>
 
         <Togglable buttonLabel='new note'>
-          <BlogForm 
-              handleBlogPost = {handleBlogPost}
-              title = {title}
-              author = {author}
-              url = {url}
-              setTitle = {setTitle}
-              setAuthor = {setAuthor}
-              setUrl = {setUrl}
-          />
+          <BlogForm createBlog = {addBlog}/>
         </Togglable>
 
           {blogs.map(blog =>
