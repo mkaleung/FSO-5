@@ -21,9 +21,10 @@ const App = () => {
   const [blogs, setBlogs] = useState([])
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
-    )  
+    blogService.getAll().then(blogs => {
+        blogs.sort((a,b) => (b.likes - a.likes))
+        setBlogs( blogs )
+    })  
   }, [blogs])
 
   useEffect(() => {
@@ -93,7 +94,7 @@ const App = () => {
     blogService
     .update(blogId, blogObject)
   }
-  
+
   const addBlog = (blogObject) => {
     blogService
     .create(blogObject)
