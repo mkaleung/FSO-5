@@ -95,6 +95,11 @@ const App = () => {
     .update(blogId, blogObject)
   }
 
+  const deleteBlog = (blogId) => {
+    blogService
+    .remove(blogId)
+  }
+
   const addBlog = (blogObject) => {
     blogService
     .create(blogObject)
@@ -134,7 +139,7 @@ const App = () => {
         </Togglable>
 
           {blogs.map(blog =>
-            <Blog key={blog.id} blog={blog} updateBlog = {addLike}/>
+            <Blog key={blog.id} blog={blog} updateBlog = {addLike} deleteBlog = {deleteBlog} />
           )}
         </div>
 
