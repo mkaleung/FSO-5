@@ -22,7 +22,7 @@ const Blog = ({blog}) => {
     <div style={blogStyle}>
       <div style={hideWhenVisible}>
           {blog.title}
-          <button onClick={() => setBlogVisible(true)}>view</button>
+          <button onClick={() => {setBlogVisible(true)}}>view</button>
       </div>
       <div style={showWhenVisible}>
         <p style={textStyle}>
@@ -35,10 +35,9 @@ const Blog = ({blog}) => {
           <button>like</button>
         </p>
         <p style={textStyle}>{blog.url}</p>
-
-      </div>
-
-      
+        {(blog.user) && blog.user.name}
+        
+      </div>      
     </div>  
   )
 }
