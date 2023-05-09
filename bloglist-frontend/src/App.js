@@ -9,6 +9,8 @@ import Togglable from './components/Toggleable'
   /*
     username: root2
     password: test
+
+    next step: 5.7
   */
 
 const App = () => {
@@ -109,7 +111,7 @@ const App = () => {
    })
   }
 
-  
+
   return (
     <div>
       <h2>blogs</h2>
